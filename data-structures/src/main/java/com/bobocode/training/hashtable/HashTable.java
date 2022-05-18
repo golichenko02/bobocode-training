@@ -1,4 +1,4 @@
-package com.bobocode.training;
+package com.bobocode.training.hashtable;
 
 import java.util.Objects;
 
