@@ -1,4 +1,4 @@
-package com.bobocode.training;
+package com.bobocode.training.hashtable;
 
 /**
  * A generic class Node that supports two type params: one for the key and one for the value.
