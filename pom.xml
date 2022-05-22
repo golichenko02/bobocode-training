@@ -12,6 +12,7 @@
         <module>data-structures</module>
         <module>training-util</module>
         <module>java-library-training</module>
+        <module>algorithms</module>
     </modules>
 
     <properties>
