@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.concurrent.RecursiveTask;
 
 public class ParallelMergeSort<T extends Comparable<? super T>> extends RecursiveTask<List<T>> {
-    private List<T> list;
+    private final List<T> list;
 
     public ParallelMergeSort(List<T> list) {
         this.list = list;
@@ -36,14 +36,10 @@ public class ParallelMergeSort<T extends Comparable<? super T>> extends Recursiv
         int rightIdx = 0;
 
         while (leftIdx < left.size() && rightIdx < right.size()) {
-            T leftElem = left.get(leftIdx);
-            T rightElem = right.get(rightIdx);
-            if (leftElem.compareTo(rightElem) <= 0) {
-                list.set(generalIdx++, leftElem);
-                leftIdx++;
+            if (left.get(leftIdx).compareTo(right.get(rightIdx)) <= 0) {
+                list.set(generalIdx++, left.get(leftIdx++));
             } else {
-                list.set(generalIdx++, rightElem);
-                rightIdx++;
+                list.set(generalIdx++, right.get(rightIdx++));
             }
         }
 
@@ -52,7 +48,7 @@ public class ParallelMergeSort<T extends Comparable<? super T>> extends Recursiv
         }
 
         while (rightIdx < right.size()) {
-            list.set(generalIdx++, left.get(rightIdx++));
+            list.set(generalIdx++, right.get(rightIdx++));
         }
     }
 }
