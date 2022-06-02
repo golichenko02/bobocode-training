@@ -14,6 +14,7 @@
         <module>java-library-training</module>
         <module>algorithms</module>
         <module>oop-training</module>
+        <module>concurrency</module>
     </modules>
 
     <properties>
