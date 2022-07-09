@@ -15,6 +15,10 @@
         <module>algorithms</module>
         <module>oop-training</module>
         <module>concurrency</module>
+        <module>demo-module</module>
+        <module>servlet-demo-app</module>
+        <module>web</module>
+        <module>custom-application-context</module>
     </modules>
 
     <properties>
