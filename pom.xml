@@ -19,6 +19,7 @@
         <module>servlet-demo-app</module>
         <module>web</module>
         <module>custom-application-context</module>
+        <module>spring-context-training-task</module>
     </modules>
 
     <properties>
