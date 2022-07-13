@@ -2,7 +2,11 @@ package com.bobocode.springcontexttrainingtask.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -10,27 +14,27 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.net.URL;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toMap;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class NasaService {
 
-    private final String API_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos";
-    private final String API_KEY = "DEMO_KEY";
+    @Value("${nasa.api.url}")
+    private String API_URL;
+    @Value("${nasa.api.key}")
+    private String API_KEY;
     private final RestTemplate restTemplate;
 
+    @Cacheable("picture")
     public URI findLargestNasaPicture(Long sol) {
         Optional<JsonNode> response = Optional.ofNullable(restTemplate.getForObject(prepareURI(sol), JsonNode.class));
-
+        log.info("Calling nasa by sol: {}", sol);
         Pair<URI, Long> result = response.map(jsonNode -> jsonNode.findValues("img_src").parallelStream()
                         .map(JsonNode::asText)
                         .map(URI::create)
@@ -40,6 +44,11 @@ public class NasaService {
                         .orElse(Pair.of(URI.create("NOT_FOUND"), -1L)))
                 .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
         return result.getKey();
+    }
+
+    @CacheEvict(value = "picture", allEntries = true)
+    public void clearCache(){
+        log.debug("Clearing picture cache...");
     }
 
     private Long getSize(URI url) {
