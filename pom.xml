@@ -21,6 +21,7 @@
         <module>nasa-service</module>
         <module>spring-magic</module>
         <module>connection-pool</module>
+        <module>url-shortener</module>
     </modules>
 
     <properties>
