@@ -22,6 +22,8 @@
         <module>spring-magic</module>
         <module>connection-pool</module>
         <module>url-shortener</module>
+        <module>my-orm</module>
+        <module>url-shortener-redis</module>
     </modules>
 
     <properties>

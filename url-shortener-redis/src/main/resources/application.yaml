@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: url-shortener-redis
+  redis:
+    host: localhost
+    port: 6379
+logging:
+  level:
+    root: info
+    org.springframework.data.*.*: trace
+    org.springframework.cache.*.*: trace

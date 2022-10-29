@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: url-shortener-service
+    image: url-shortener-redis
+    links:
+      - redis
+    ports:
+      - "8080:8080"
+
+  redis:
+    container_name: url-shortener-redis
+    image: redis
+    ports:
+      - "6379:6379"

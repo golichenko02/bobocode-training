@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bobocode</groupId>
-    <artifactId>spring-context-training-task</artifactId>
+    <artifactId>nasa-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-context-training-task</name>
-    <description>spring-context-training-task</description>
+    <name>nasa-service</name>
+    <description>nasa-service</description>
     <properties>
         <java.version>17</java.version>
     </properties>
